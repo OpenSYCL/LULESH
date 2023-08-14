@@ -5,7 +5,7 @@ SHELL = /bin/sh
 
 LULESH_EXEC = lulesh2.0
 
-CXX = nvc++
+CXX = /home/aksel/src/hipSYCL/master/build/install/bin/syclcc
 
 SOURCES2.0 = \
 	lulesh.cc \
@@ -15,8 +15,8 @@ SOURCES2.0 = \
 	lulesh-init.cc
 OBJECTS2.0 = $(SOURCES2.0:.cc=.o)
 
-CXXFLAGS = -w -fast -Mnouniform -Mfprelaxed -stdpar=gpu -std=c++11 -DUSE_MPI=0
-LDFLAGS = $(CXXFLAGS) 
+CXXFLAGS = --hipsycl-stdpar --hipsycl-targets="generic" -O3 -DUSE_MPI=0
+LDFLAGS = $(CXXFLAGS) -ltbb
 
 %.o: ../src/%.cc ../src/lulesh.h
 	@echo "Building $<"

@@ -109,14 +109,16 @@ inline real10 FABS(real10 arg) { return fabsl(arg) ; }
 template <typename T>
 T *Allocate(size_t size)
 {
-   return static_cast<T *>(malloc(sizeof(T)*size)) ;
+   //return static_cast<T *>(malloc(sizeof(T)*size)) ;
+   return new T [size];
 }
 
 template <typename T>
 void Release(T **ptr)
 {
    if (*ptr != NULL) {
-      free(*ptr) ;
+      //free(*ptr) ;
+     delete [] (*ptr);
       *ptr = NULL ;
    }
 }
